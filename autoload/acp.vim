@@ -216,9 +216,12 @@ function acp#onPopupPost()
   if pumvisible() && exists('s:behavsCurrent[s:iBehavs]')
     inoremap <silent> <expr> <C-h> acp#onBs()
     inoremap <silent> <expr> <BS>  acp#onBs()
-    " a command to restore to original text and select the first match
-    return (s:behavsCurrent[s:iBehavs].command =~# "\<C-p>" ? "\<C-n>\<Up>"
-          \                                                 : "\<C-p>\<Down>")
+    " do not select first popup item. 
+    " TODO make it optional and by right way.    
+    return "\<C-p>"
+    " Old:
+      "return (s:behavsCurrent[s:iBehavs].command =~# "\<C-p>" ? "\<C-n>\<Up>"
+      "      \                                                 : "\<C-p>\<Down>")
   endif
   let s:iBehavs += 1
   if len(s:behavsCurrent) > s:iBehavs 
